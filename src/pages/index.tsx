@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { HousesQuery } from "@src/queries";
 import { House } from "@src/types";
 import { initializeApollo } from "@src/utils/apolloClient";
+import { LoadMore } from "@src/components/LoadMore";
 import { Grid } from "@src/components/Grid";
 import { Spinner } from "@src/components/Spinner";
 
@@ -35,11 +36,8 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      {data?.houses.map((house) => {
-        return <div key={house.name}>{house.name}</div>;
-      })}
-
-      <button onClick={loadMore}>Load more</button>
+      <Grid houses={data?.houses} />
+      <LoadMore loading={loading} loadMore={loadMore} />
     </div>
   );
 };
