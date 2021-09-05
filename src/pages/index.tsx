@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/client";
 import { HousesQuery } from "@src/queries";
 import { House } from "@src/types";
 import { initializeApollo } from "@src/utils/apolloClient";
+import { Grid } from "@src/components/Grid";
+import { Spinner } from "@src/components/Spinner";
 
 const LIMIT = 10;
 
@@ -24,7 +26,7 @@ const Home: NextPage = () => {
   }, [fetchMore]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Spinner absolute />;
   }
 
   if (error) {
