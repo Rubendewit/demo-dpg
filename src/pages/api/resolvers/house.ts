@@ -7,8 +7,6 @@ type Args = {
   id: string;
 };
 
-
-
 const getUrl = (id: string) => `${HOUSES_URL}/${id}`;
 
 export const houseResolver = async (_parent: any, args: Args) => {

@@ -10,7 +10,7 @@ import { Spinner } from "@src/components/Spinner";
 
 const LIMIT = 10;
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   const page = useRef(1);
   const { data, loading, error, fetchMore } = useQuery<{
     houses: House[];
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {

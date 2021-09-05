@@ -10,3 +10,16 @@ export const HousesQuery = gql`
     }
   }
 `;
+
+export const HouseQuery = gql`
+  query House($id: String!) {
+    house(id: $id) {
+      id
+      name
+      region
+      words
+      coatOfArms
+      titles
+    }
+  }
+`;
