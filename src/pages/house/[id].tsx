@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { HouseQuery } from "@src/queries";
 import { House } from "@src/types";
 import { initializeApollo } from "@src/utils/apolloClient";
+import { HouseInfo } from "@src/components/HouseInfo";
 import { Spinner } from "@src/components/Spinner";
 import { BackLink } from "@src/components/BackLink";
 
@@ -26,7 +27,7 @@ const HousePage: NextPage<HousePageProps> = ({ id }) => {
           <a>Back</a>
         </NextLink>
       </BackLink>
-      <p>{data?.house?.name}</p>
+      <HouseInfo house={data?.house} />
     </div>
   );
 };
