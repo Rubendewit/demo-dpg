@@ -1,8 +1,9 @@
 import { useCallback, useRef } from "react";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { useQuery } from "@apollo/client";
 import { HousesQuery } from "@src/queries";
 import { House } from "@src/types";
+import { initializeApollo } from "@src/utils/apolloClient";
 
 const LIMIT = 10;
 
@@ -42,3 +43,25 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  try {
+    const client = initializeApollo();
+    await client.query({
+      query: HousesQuery,
+      variables: {
+        page: 1,
+        limit: LIMIT,
+      },
+    });
+
+    return {
+      props: {
+        initialApolloState: client.cache.extract(),
+      },
+    };
+  } catch (error) {
+    console.error(`SSR Error occurred while fetching homepage`, error);
+    return { notFound: true };
+  }
+};

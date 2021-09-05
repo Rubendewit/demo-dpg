@@ -3,7 +3,9 @@ import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "@src/utils/apolloClient";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const apolloClient = useApollo();
+  const { initialApolloState } = pageProps;
+
+  const apolloClient = useApollo(initialApolloState);
 
   return (
     <ApolloProvider client={apolloClient}>
