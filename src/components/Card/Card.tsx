@@ -4,10 +4,14 @@ import { AllHouses } from "@src/types";
 import { Link, Name, Motto, Region } from "./Card.styled";
 
 type CardProps = {
-  house: AllHouses[number];
+  house: AllHouses[number] | undefined;
 };
 
 export const Card: FC<CardProps> = ({ house }) => {
+  if (!house) {
+    return null;
+  }
+
   const { id, name, region, words } = house;
 
   const link = `/house/${id}`;
