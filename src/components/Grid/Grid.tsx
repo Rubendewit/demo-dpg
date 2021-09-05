@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { AllHouses } from "@src/types";
+import { Card } from "../Card";
 import { Wrapper } from "./Grid.styled";
 
 type GridProps = {
@@ -14,7 +15,7 @@ export const Grid: FC<GridProps> = ({ houses }) => {
   return (
     <Wrapper>
       {houses.map((house) => (
-        <p key={house.id}>{house.name}</p>
+        <Card key={house.id} house={house} />
       ))}
     </Wrapper>
   );
