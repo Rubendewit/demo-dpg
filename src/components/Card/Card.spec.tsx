@@ -18,7 +18,7 @@ describe("Card", () => {
     expect(queryByText(/Fire and Blood/)).toBeInTheDocument();
   });
 
-  it("should return null if houses are undefined", () => {
+  it("should return null if house data is undefined", () => {
     const { container } = render(<Card house={undefined} />);
     expect(container).toBeEmptyDOMElement();
   });
