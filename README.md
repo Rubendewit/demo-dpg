@@ -1,3 +1,5 @@
+# Demo application for DPG
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -12,23 +14,32 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Open [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql) to view the GraphQL explorer.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Next steps
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+There are still (many) improvements to be made. Due to limited time, the following points have not been picked up, but all are good contenders to improve the application.
 
-## Learn More
+### Performance
 
-To learn more about Next.js, take a look at the following resources:
+Most notably, we can gain some performance improvement by pre-rendering all House pages with `getStaticPaths`.
+We could potentially leverage the link header in the response to generate the appropriate pages.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+During development, I also noticed that data is being refetched (and previously available data is lost) upon navigating back from a House detail page to the homepage. The data should remain, but I have unfortunately not been able to resolve this. Fixing this issue would mean that no extra requests need to be performed when navigating back, and that the scroll position could be restored.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Last but not least, caching could be implemented in the Next API. While not noticeable in a development environment, if this application were used by multiple users, adding proper caching mechanisms is highly encouraged. It would significantly reduce the load on the [API of Ice and Fire](https://www.anapioficeandfire.com/).
 
-## Deploy on Vercel
+### Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The tests could be extended to also test the NextJS pages. Cypress is a good options for creating end-to-end tests.
+Another option would be to use React Testing Library combined with MockServiceWorker. This setup could allow us to test the pages in a way that closely resembles how a user would use the application.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Features
+
+Once the aforementioned points have been resolved, we could add more features.
+
+Filtering the Houses could be a fun addition, and the API already supports filtering the houses.
+
+Another option would be to add Character pages, and add links from the Houses pages to Character pages, using data that we take from the `currentLord` and `swornMembers` fields.
+
+Lastly, and more of a long shot, we could perhaps search for another API that would allow us to retrieve images related to the Houses or Characters. We could add these to our NextJS APIs, which would mean that there is a minimal impact on the frontend, as the extra requests are performed on the server.
