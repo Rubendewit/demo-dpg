@@ -1,14 +1,15 @@
 import { useCallback, useRef } from "react";
 import type { NextPage } from "next";
 import { useQuery } from "@apollo/client";
-import { HousesQuery } from "../queries";
+import { HousesQuery } from "@src/queries";
+import { House } from "@src/types";
 
 const LIMIT = 10;
 
 const Home: NextPage = () => {
   const page = useRef(1);
   const { data, loading, error, fetchMore } = useQuery<{
-    houses: any[];
+    houses: House[];
   }>(HousesQuery, {
     variables: {
       page: 1,
@@ -31,7 +32,7 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      {data?.houses.map((house: any) => {
+      {data?.houses.map((house) => {
         return <div key={house.name}>{house.name}</div>;
       })}
 
