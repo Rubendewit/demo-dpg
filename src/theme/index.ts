@@ -3,6 +3,7 @@ type Colors = {
   main200: string;
   main700: string;
   main800: string;
+  accent100: string;
   accent500: string;
 };
 
@@ -24,6 +25,7 @@ export const theme: Theme = {
     main200: "#CCC5B9",
     main700: "#403D39",
     main800: "#252422",
+    accent100: "#F38356",
     accent500: "#EB5E28",
   },
   responsive: {

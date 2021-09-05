@@ -7,6 +7,7 @@ import { initializeApollo } from "@src/utils/apolloClient";
 import { LoadMore } from "@src/components/LoadMore";
 import { Grid } from "@src/components/Grid";
 import { Spinner } from "@src/components/Spinner";
+import { Error } from "@src/components/Error";
 
 const LIMIT = 10;
 
@@ -31,7 +32,8 @@ const HomePage: NextPage = () => {
   }
 
   if (error) {
-    return <p>Error occurred: {JSON.stringify(error)}</p>;
+    console.error("Error occurred in Home page", error);
+    return <Error />;
   }
 
   return (

@@ -7,6 +7,7 @@ import { initializeApollo } from "@src/utils/apolloClient";
 import { HouseInfo } from "@src/components/HouseInfo";
 import { Spinner } from "@src/components/Spinner";
 import { BackLink } from "@src/components/BackLink";
+import { Error } from "@src/components/Error";
 
 type HousePageProps = {
   id: string;
@@ -17,7 +18,11 @@ const HousePage: NextPage<HousePageProps> = ({ id }) => {
     variables: { id },
   });
 
-  if (error) return <p>Error: {JSON.stringify(error)}</p>;
+  if (error) {
+    console.error(`Error occurred in House detail page "${id}"`, error);
+    return <Error />;
+  }
+
   if (loading) return <Spinner absolute />;
 
   return (
