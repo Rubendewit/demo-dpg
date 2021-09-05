@@ -14,9 +14,9 @@ export const Grid: FC<GridProps> = ({ houses }) => {
 
   return (
     <Wrapper>
-      {houses.map((house) => (
-        <Card key={house.id} house={house} />
-      ))}
+      {houses.map(
+        (house) => !!house?.id && <Card key={house?.id} house={house} />
+      )}
     </Wrapper>
   );
 };

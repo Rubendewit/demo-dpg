@@ -13,7 +13,7 @@ export const Card: FC<CardProps> = ({ house }) => {
   const link = `/house/${id}`;
 
   return (
-    <NextLink as={link} href={{ pathname: link }}>
+    <NextLink as={link} href={{ pathname: link }} passHref>
       <Link>
         <Name>{name}</Name>
         <Region>{region}</Region>
