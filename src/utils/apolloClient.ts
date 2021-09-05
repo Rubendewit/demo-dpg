@@ -2,17 +2,38 @@ import { useMemo } from "react";
 import getConfig from "next/config";
 import {
   ApolloClient,
+  FieldPolicy,
   HttpLink,
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
 
+const mergeCacheOptions: FieldPolicy = {
+  keyArgs: false,
+  merge(existing: any[] = [], incoming: any) {
+    return [...existing, ...incoming];
+  },
+};
+
 export const createClient = (): ApolloClient<NormalizedCacheObject> => {
   const { publicRuntimeConfig } = getConfig();
 
+  const cache = new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          houses: mergeCacheOptions,
+          characters: mergeCacheOptions,
+        },
+      },
+    },
+  });
+
+  const link = new HttpLink({ uri: publicRuntimeConfig.graphqlEndpoint });
+
   return new ApolloClient({
-    link: new HttpLink({ uri: publicRuntimeConfig.graphqlEndpoint }),
-    cache: new InMemoryCache(),
+    cache,
+    link,
   });
 };
 

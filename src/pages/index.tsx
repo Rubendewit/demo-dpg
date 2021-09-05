@@ -1,18 +1,27 @@
+import { useCallback, useRef } from "react";
 import type { NextPage } from "next";
 import { useQuery } from "@apollo/client";
-import { HousesQuery } from "@src/queries";
+import { HousesQuery } from "../queries";
 
 const LIMIT = 10;
 
 const Home: NextPage = () => {
-  const { data, error } = useQuery<{ houses: any[] }>(HousesQuery, {
+  const page = useRef(1);
+  const { data, loading, error, fetchMore } = useQuery<{
+    houses: any[];
+  }>(HousesQuery, {
     variables: {
       page: 1,
       limit: LIMIT,
     },
   });
 
-  if (!data && !error) {
+  const loadMore = useCallback(() => {
+    page.current = page.current + 1;
+    fetchMore({ variables: { page: page.current } });
+  }, [fetchMore]);
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
@@ -22,9 +31,11 @@ const Home: NextPage = () => {
 
   return (
     <div>
-      {data?.houses.map((house) => {
+      {data?.houses.map((house: any) => {
         return <div key={house.name}>{house.name}</div>;
       })}
+
+      <button onClick={loadMore}>Load more</button>
     </div>
   );
 };
