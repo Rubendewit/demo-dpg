@@ -9,7 +9,7 @@ import { Grid } from "@src/components/Grid";
 import { Spinner } from "@src/components/Spinner";
 import { Error } from "@src/components/Error";
 
-const LIMIT = 10;
+const LIMIT = 40;
 
 const HomePage: NextPage = () => {
   const page = useRef(1);
