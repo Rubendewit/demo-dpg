@@ -16,6 +16,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Open [http://localhost:3000/api/graphql](http://localhost:3000/api/graphql) to view the GraphQL explorer.
 
+Or go to [https://dpg.rubendewit.nl/](https://dpg.rubendewit.nl/) to view the application.
+
 ## Next steps
 
 There are still (many) improvements to be made. Due to limited time, the following points have not been picked up, but all are good contenders to improve the application.
