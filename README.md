@@ -22,6 +22,12 @@ Or go to [https://dpg.rubendewit.nl/](https://dpg.rubendewit.nl/) to view the ap
 
 There are still (many) improvements to be made. Due to limited time, the following points have not been picked up, but all are good contenders to improve the application.
 
+### Technical improvements
+
+The `LoadMore` component still has some issues that I'd like to resolve. After loading all of the data, `LoadMore` should be removed. I have not yet built logic to detect when all Houses are retrieved, and having the loader remain there is confusing.
+
+I would also spend some more time on `LoadMore` to improve visibility detection. If `LoadMore` remains visible after fetching data, the visibility status isn't updated, which prevents more data from being fetched.
+
 ### Performance
 
 Most notably, we can gain some performance improvement by pre-rendering all House pages with `getStaticPaths`.
